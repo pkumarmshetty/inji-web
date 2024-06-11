@@ -5,23 +5,27 @@ import {Grid} from "@mui/material";
 
 import {InjiNavbar, StyledGridItem, StyledLink, StyledToolbar} from "./styles";
 import {useNavigate} from 'react-router-dom';
-import logo from "../../assets/inji-logo.png";
+// import logo from "../../assets/inji-logo.png";
+
 
 
 function Navbar(props) {
 
     const navigate = useNavigate();
+    const logoImageName = process.env.REACT_APP_LOGO_IMAGE;
+    const logoImagePath = require(`../../assets/${logoImageName}`);  
+
     return (
         <InjiNavbar data-testid='navbar'>
             <Container>
                 <StyledToolbar disableGutters>
                     <Grid container style={{justifyItems: 'end'}}>
                         <StyledGridItem item xs={3} onClick={() => {navigate('/')}}>
-                            <img src={logo} alt='logo' width='140px' height='70px'/>
+                            <img src={logoImagePath} alt='logo' width='140px' height='70px'/>
                         </StyledGridItem>
                         <StyledGridItem item xs={9} style={{justifyContent: 'end'}}>
                             <Box>
-                                <StyledLink href={"https://docs.mosip.io/inji"} target="_blank" rel="noopener noreferrer">{"About Inji"}</StyledLink>
+                                <StyledLink href={"https://docs.mosip.io/inji"} target="_blank" rel="noopener noreferrer">{`About ${process.env.REACT_APP_MY_TEXT||''}`}</StyledLink>
                             </Box>
                             <Box>
                                 <StyledLink href={"/help"}>{"Help"}</StyledLink>
